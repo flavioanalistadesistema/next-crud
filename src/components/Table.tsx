@@ -7,10 +7,10 @@ interface TableProps {
 export default function Table(props: TableProps) {
     function renderHead() {
         return (
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Idade</th>
+            <tr className="w-screen">
+                <th className="p-4 text-left">Id</th>
+                <th className="p-4 text-left">Nome</th>
+                <th className="p-4 text-left">Idade</th>
             </tr>
         )
     }
@@ -18,18 +18,21 @@ export default function Table(props: TableProps) {
     function renderClients() {
         return props.clients?.map((clients, i) => {
             return (
-                <tr>
-                    <td>{clients.id}</td>
-                    <td>{clients.name}</td>
-                    <td>{clients.age}</td>
+                <tr key={clients.id} className={i % 2 === 0 ? "bg-purple-200" : "bg-purple-100"}>
+                    <td className="p-4 text-left">{clients.id}</td>
+                    <td className="p-4 text-left">{clients.name}</td>
+                    <td className="p-4 text-left">{clients.age}</td>
                 </tr>
             )
         })
     }
 
     return (
-        <table>
-            <thead>
+        <table className="w-full rounded-xl overflow-hidden">
+            <thead className={`
+                bg-gradient-to-r from-purple-500 to-purple-800
+                text-gray-200 
+            `}>
                 {renderHead()}
             </thead>
             <tbody>
