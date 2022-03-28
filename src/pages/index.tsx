@@ -6,6 +6,8 @@ import Form from "../components/Form";
 import { useState } from "react";
 
 export default function Home() {
+  const [visible, setVisible] = useState<'form' | 'table'>('table')
+  const [client, setClient] = useState<Client>(Client.emptyClient)
   const clients = [
     new Client('Flavio', 43, '1'),
     new Client('Luciana', 43, '2'),
@@ -14,7 +16,8 @@ export default function Home() {
   ]
 
   function clientSelect(client: Client) {
-    console.log(client.name)
+    setClient(client)
+    setVisible('form')
   }
 
   function clientDelete(client: Client) {
@@ -23,11 +26,14 @@ export default function Home() {
   }
 
   function saveClient(client: Client) {
-    console.log('client', client);
-    
+    setClient(client)
+    setVisible('table')
   }
 
-  const [visible, setVisible] = useState<'form' | 'table'>('table')
+  function newClient() {
+    setClient(Client.emptyClient)
+    setVisible('form') 
+  }
 
   return (
     <div className={`
@@ -40,7 +46,7 @@ export default function Home() {
           <>
             <div className={`flex justify-end`}>
               <Button 
-                onClick={() => setVisible('form')}
+                onClick={() => newClient()}
                 color="green" 
                 className="mb-4">
                 Novo Cadastro
@@ -54,7 +60,7 @@ export default function Home() {
           </>
         ) : (
           <Form 
-            client={clients[1]} 
+            client={client} 
             alterClient={saveClient}
             canceled={() => setVisible('table')}
           />
