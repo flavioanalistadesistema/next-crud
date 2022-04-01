@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function hooksUseTableOrForm() {
+export default function HooksUseTableOrForm() {
     
     const [visible, setVisible] = useState<'form'|'table'>('table')
     const visibleForm = () => setVisible('form')

@@ -2,7 +2,7 @@ import Table from "../components/Table"
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import Form from "../components/Form";
-import hooksUseClient from "../backend/hooks/hooksUseClient";
+import HooksUseClient from "../backend/hooks/HooksUseClient";
 
 export default function Home() {
 
@@ -15,7 +15,7 @@ export default function Home() {
     clientDelete,
     clientAll,
     client
-  } = hooksUseClient()
+  } = HooksUseClient()
 
   return (
     <div className={`

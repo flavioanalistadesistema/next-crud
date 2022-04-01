@@ -2,16 +2,16 @@ import { useEffect, useState } from "react"
 import Client from "../../core/Client"
 import ClientRepository from "../../core/ClientRepository"
 import CollectionClient from "../db/CollectionClient"
-import hooksUseTableOrForm from "./hooksUseTableOrForm"
+import HooksUseTableOrForm from "./HooksUseTableOrForm"
 
-export default function hooksUseClient() {
+export default function HooksUseClient() {
     
     const rep: ClientRepository = new CollectionClient()
     const {
         visibleForm,
         visibleTable,
         validTable,
-    } = hooksUseTableOrForm()
+    } = HooksUseTableOrForm()
 
     const [client, setClient] = useState<Client>(Client.emptyClient)
     const [clientAll, setClientAll] = useState<Client[]>([])
