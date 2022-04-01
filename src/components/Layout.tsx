@@ -12,7 +12,7 @@ export default function Layout(props: LayoutProps) {
             bg-white text-gray-800 rounded-md
         `}>
             <Title>
-                {props.title}
+                {props.title} | <a className="text-blue-600" href="https://github.com/flavioanalistadesistema/next-crud">Link repositorio</a>
             </Title>
             <div className="p-6">
                 {props.children}
