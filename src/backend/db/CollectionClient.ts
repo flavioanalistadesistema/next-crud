@@ -1,8 +1,8 @@
 import firebase from "../config";
 import Client from "../../core/Client";
-import ClientRepository from "../../core/ClientRopository";
+import ClientRepository from "../../core/ClientRepository";
 
-export default class ColectionClient implements ClientRepository {
+export default class CollectionClient implements ClientRepository {
     
     #converter = {
         toFirestore(client: Client) {

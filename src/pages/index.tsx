@@ -3,17 +3,27 @@ import Layout from "../components/Layout";
 import Client from "../core/Client";
 import Button from "../components/Button";
 import Form from "../components/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ClientRepository from "../core/ClientRepository";
+import CollectionClient from "../backend/db/CollectionClient";
 
 export default function Home() {
+
+  const rep: ClientRepository = new CollectionClient()
+
   const [visible, setVisible] = useState<'form' | 'table'>('table')
   const [client, setClient] = useState<Client>(Client.emptyClient)
-  const clients = [
-    new Client('Flavio', 43, '1'),
-    new Client('Luciana', 43, '2'),
-    new Client('Gabriel', 9, '3'),
-    new Client('Anna', 5, '4')
-  ]
+  const [clientAll, setClientAll] = useState<Client[]>([])
+  
+
+  function getAll() {
+    rep.allClient().then(clientAll => {
+      setClientAll(clientAll)
+      setVisible('table')
+    })
+  }
+
+  useEffect(getAll, [])
 
   function clientSelect(client: Client) {
     setClient(client)
@@ -21,13 +31,13 @@ export default function Home() {
   }
 
   function clientDelete(client: Client) {
-    console.log(`Exluir----${client.id}`);
-
+    rep.delete(client)
+    getAll()
   }
 
   function saveClient(client: Client) {
-    setClient(client)
-    setVisible('table')
+    rep.save(client)
+    getAll()
   }
 
   function newClient() {
@@ -53,7 +63,7 @@ export default function Home() {
               </Button>
             </div>
             <Table
-              clients={clients}
+              clients={clientAll}
               clientSelect={clientSelect}
               clientDelete={clientDelete}
             ></Table>
